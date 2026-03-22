@@ -9,16 +9,16 @@ import { RadioToggle } from '../../../shared/components/RadioToggle';
 import type { OrderType, ProductType } from '../types/order';
 
 export const OrderForm = () => {
-  // Store actions and state
+
   const {
     stockInfo, orderMode, exchange, quantity, price, orderType, productType,
     setOrderMode, setExchange, setQuantity, setPrice, setOrderType, setProductType, resetForm
   } = useOrderStore();
 
-  // Calculated values and validations
+
   const { requiredMargin, isMarginSufficient } = useOrderCalculations();
 
-  // Need to get available margin dynamically from store again if it wasn't returned in hook (it is in store)
+
   const availableMargin = useOrderStore((state) => state.availableMargin);
 
   const handleAction = () => {
@@ -28,7 +28,7 @@ export const OrderForm = () => {
 
   return (
     <div className="w-[500px] bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden mx-auto">
-      {/* Header */}
+
       <div className="bg-[#EEF2F6] px-5 py-4 border-b border-gray-200 flex flex-col gap-3">
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-bold text-gray-800 tracking-tight">{stockInfo.name}</h2>
@@ -52,7 +52,7 @@ export const OrderForm = () => {
         />
       </div>
 
-      {/* Body: 2-column grid */}
+
       <div className="p-6 flex flex-col gap-7">
         <div className="grid grid-cols-2 gap-x-8 gap-y-6">
           <StepperInput
@@ -91,7 +91,7 @@ export const OrderForm = () => {
           />
         </div>
 
-        {/* Footer actions and Margin */}
+
         <div className="flex items-end justify-between pt-4 mt-2">
           <div className="flex gap-8">
             <div className="flex flex-col">

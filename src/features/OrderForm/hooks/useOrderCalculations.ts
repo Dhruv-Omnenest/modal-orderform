@@ -1,11 +1,11 @@
 import { useOrderStore } from '../store/order.store';
 
-// Margin percentage lookup mock
+
 const getMarginMultiplier = (productType: string) => {
   switch (productType) {
-    case 'MIS': return 0.2; // 20% margin required
-    case 'CNC': return 1.0; // 100% margin required
-    case 'NRML': return 0.5; // 50% margin required
+    case 'MIS': return 0.2;
+    case 'CNC': return 1.0;
+    case 'NRML': return 0.5;
     default: return 1.0;
   }
 };
@@ -19,7 +19,7 @@ export const useOrderCalculations = () => {
   const exchange = useOrderStore((state) => state.exchange);
   const stockInfo = useOrderStore((state) => state.stockInfo);
 
-  // If Market order, calculate requirement based on current market price
+
   const effectivePrice = orderType === 'Market' 
     ? stockInfo.prices[exchange] 
     : price;

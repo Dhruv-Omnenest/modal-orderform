@@ -21,7 +21,7 @@ export interface OrderState {
   productType: ProductType;
   availableMargin: number;
   
-  // Actions
+
   setOrderMode: (mode: OrderMode) => void;
   setExchange: (exchange: Exchange) => void;
   setQuantity: (qty: number) => void;

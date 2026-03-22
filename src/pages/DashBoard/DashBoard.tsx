@@ -19,13 +19,13 @@ export const DashBoard = () => {
           </Button>
         </div>
 
-        {/* Modal Overlay */}
+
         {isModalOpen && (
           <div 
             className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center cursor-pointer transition-opacity"
             onClick={() => setIsModalOpen(false)}
           >
-            {/* Modal Content - stopPropagation prevents closing when clicking the form itself */}
+
             <div 
               className="cursor-default" 
               onClick={(e) => e.stopPropagation()}

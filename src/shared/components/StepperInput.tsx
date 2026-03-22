@@ -35,7 +35,7 @@ export const StepperInput = ({ label, value, onChange, min = 1, max }: StepperIn
           onChange={(e) => {
             const val = parseInt(e.target.value, 10);
             if (!isNaN(val)) onChange(val);
-            else if (e.target.value === '') onChange(0); // Allow clearing temporarily
+            else if (e.target.value === '') onChange(0);
           }}
           onBlur={() => {
             if (value < min) onChange(min);
