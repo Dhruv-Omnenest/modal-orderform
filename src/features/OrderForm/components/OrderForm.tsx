@@ -17,7 +17,7 @@ export const OrderForm = () => {
 
   // Calculated values and validations
   const { requiredMargin, isMarginSufficient } = useOrderCalculations();
-  
+
   // Need to get available margin dynamically from store again if it wasn't returned in hook (it is in store)
   const availableMargin = useOrderStore((state) => state.availableMargin);
 
@@ -32,17 +32,17 @@ export const OrderForm = () => {
       <div className="bg-[#EEF2F6] px-5 py-4 border-b border-gray-200 flex flex-col gap-3">
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-bold text-gray-800 tracking-tight">{stockInfo.name}</h2>
-          <TabBarComponent 
+          <TabBarComponent
             className="w-36 shadow-sm"
             options={[
               { label: 'Buy', value: 'Buy', activeColorClass: 'bg-blue-600 text-white shadow' },
-              { label: 'Sell', value: 'Sell', activeColorClass: 'bg-red-600 text-white shadow' }
+              { label: 'Sell', value: 'Sell', activeColorClass: 'bg-red-600 text-white shadow' },
             ]}
             value={orderMode}
             onChange={(val) => setOrderMode(val as 'Buy' | 'Sell')}
           />
         </div>
-        <RadioToggle 
+        <RadioToggle
           options={[
             { label: 'NSE', value: 'NSE', suffix: stockInfo.prices.NSE.toFixed(2) },
             { label: 'BSE', value: 'BSE', suffix: stockInfo.prices.BSE.toFixed(2) }
@@ -55,20 +55,20 @@ export const OrderForm = () => {
       {/* Body: 2-column grid */}
       <div className="p-6 flex flex-col gap-7">
         <div className="grid grid-cols-2 gap-x-8 gap-y-6">
-          <StepperInput 
-            label="Quantity" 
-            value={quantity} 
-            onChange={setQuantity} 
-            min={1} 
+          <StepperInput
+            label="Quantity"
+            value={quantity}
+            onChange={setQuantity}
+            min={1}
           />
-          <InputField 
-            label="Price" 
+          <InputField
+            label="Price"
             type="number"
             value={orderType === 'Market' ? stockInfo.prices[exchange] : price}
             onChange={(e) => setPrice(parseFloat(e.target.value) || 0)}
             disabled={orderType === 'Market'}
           />
-          <Dropdown 
+          <Dropdown
             label="Order type"
             value={orderType}
             onChange={(e) => setOrderType(e.target.value as OrderType)}
@@ -79,7 +79,7 @@ export const OrderForm = () => {
               { label: 'SL-M', value: 'SL-M' },
             ]}
           />
-          <Dropdown 
+          <Dropdown
             label="Product type"
             value={productType}
             onChange={(e) => setProductType(e.target.value as ProductType)}
@@ -103,13 +103,13 @@ export const OrderForm = () => {
               <span className="text-sm font-semibold text-gray-900">₹ {availableMargin.toFixed(2)}</span>
             </div>
           </div>
-          
+
           <div className="flex items-center gap-4">
             <Button variant="ghost" className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-semibold px-3" onClick={resetForm}>
               Cancel
             </Button>
-            <Button 
-              variant={orderMode === 'Buy' ? 'buy' : 'sell'} 
+            <Button
+              variant={orderMode === 'Buy' ? 'buy' : 'sell'}
               className="w-28 font-semibold text-base shadow-md"
               disabled={!isMarginSufficient}
               onClick={handleAction}
