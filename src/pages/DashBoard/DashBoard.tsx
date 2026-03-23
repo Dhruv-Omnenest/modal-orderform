@@ -6,7 +6,7 @@ export const DashBoard = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className="w-full flex-grow flex items-center justify-center p-8 relative">
+    <div className="w-full grow flex items-center justify-center p-8 relative">
       <div className="w-full max-w-4xl flex flex-col items-center">
         <h1 className="text-3xl font-extrabold text-gray-900 mb-8 self-start ml-20">Trading Dashboard</h1>
         

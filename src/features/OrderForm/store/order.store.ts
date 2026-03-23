@@ -1,36 +1,31 @@
 import { create } from 'zustand';
-import type { OrderState, OrderMode, Exchange, OrderType, ProductType } from '../types/order';
-
-const initialState = {
-  stockInfo: {
-    name: 'RELIANCE',
-    prices: {
-      NSE: 1415.94,
-      BSE: 1413.63,
-    }
-  },
-  orderMode: 'Buy' as OrderMode,
-  exchange: 'NSE' as Exchange,
-  quantity: 1,
-  price: 50,
-  orderType: 'Market' as OrderType,
-  productType: 'NRML' as ProductType,
-  availableMargin: 50000.00,
-};
+import type { OrderState } from '../types/order';
 
 export const useOrderStore = create<OrderState>((set) => ({
-  ...initialState,
-  
-  setOrderMode: (mode) => set({ orderMode: mode }),
+  stockInfo: {
+    name: 'RELIANCE',
+    prices: { NSE: 1415.94, BSE: 1413.63 }
+  },
+  orderMode: 'Buy',
+  exchange: 'NSE',
+  quantity: 1,
+  price: 50,
+  orderType: 'Market',
+  productType: 'NRML',
+  availableMargin: 50000.00,
+
+  setOrderMode: (orderMode) => set({ orderMode }),
   setExchange: (exchange) => set({ exchange }),
-  setQuantity: (qty) => set({ quantity: qty }),
+  setQuantity: (quantity) => set({ quantity }),
   setPrice: (price) => set({ price }),
-  setOrderType: (type) => set({ orderType: type }),
-  setProductType: (type) => set({ productType: type }),
-  
-  resetForm: () => set((state) => ({
-    ...initialState,
-    stockInfo: state.stockInfo,
-    availableMargin: state.availableMargin
+  setOrderType: (orderType) => set({ orderType }),
+  setProductType: (productType) => set({ productType }),
+  resetForm: () => set(() => ({
+    orderMode: 'Buy',
+    exchange: 'NSE',
+    quantity: 1,
+    price: 50,
+    orderType: 'Market',
+    productType: 'NRML'
   })),
 }));

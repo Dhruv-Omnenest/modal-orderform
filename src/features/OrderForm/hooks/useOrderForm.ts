@@ -1,13 +1,10 @@
+// hooks/useOrder.ts
 import { useOrderStore } from '../store/order.store';
 import { useShallow } from 'zustand/react/shallow';
 
-const MARGIN_MULTIPLIERS: Record<string, number> = {
-  MIS: 0.2,
-  CNC: 1.0,
-  NRML: 0.5,
-};
+const MARGIN_MAP: Record<string, number> = { MIS: 0.2, CNC: 1.0, NRML: 0.5 };
 
-export const useOrderForm = () => {
+export const useOrder = () => {
   const state = useOrderStore(useShallow((s) => ({
     stockInfo: s.stockInfo,
     orderMode: s.orderMode,
@@ -30,7 +27,7 @@ export const useOrderForm = () => {
     ? state.stockInfo.prices[state.exchange] 
     : state.price;
 
-  const marginMultiplier = MARGIN_MULTIPLIERS[state.productType] || 1.0;
+  const marginMultiplier = MARGIN_MAP[state.productType] || 1.0;
   const requiredMargin = state.quantity * effectivePrice * marginMultiplier;
   const isMarginSufficient = state.availableMargin >= requiredMargin;
 
@@ -39,5 +36,6 @@ export const useOrderForm = () => {
     effectivePrice,
     requiredMargin,
     isMarginSufficient,
+    missingMargin: Math.max(0, requiredMargin - state.availableMargin),
   };
 };
